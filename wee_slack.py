@@ -923,10 +923,17 @@ def buffer_switch_callback(data, signal, current_buffer):
     1) set read marker 2) determine if we have already populated
     channel history data 3) set presence to active
     """
+    cfg = w.config_get('weechat.look.read_marker_update_on_buffer_switch')
+    if cfg:
+        do_mark_read = w.config_boolean(cfg)
+    else:
+        # no such option exists
+        do_mark_read = True
+
     prev_buffer_ptr = EVENTROUTER.weechat_controller.get_previous_buffer_ptr()
     # this is to see if we need to gray out things in the buffer list
     prev = EVENTROUTER.weechat_controller.get_channel_from_buffer_ptr(prev_buffer_ptr)
-    if prev:
+    if prev and do_mark_read:
         prev.mark_read()
 
     new_channel = EVENTROUTER.weechat_controller.get_channel_from_buffer_ptr(current_buffer)
