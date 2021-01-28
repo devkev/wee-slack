@@ -5180,7 +5180,7 @@ def setup_hooks():
     w.bar_item_new('slack_away', '(extra)away_bar_item_cb', '')
 
     w.hook_timer(5000, 0, 0, "ws_ping_cb", "")
-    w.hook_timer(1000, 0, 0, "typing_update_cb", "")
+    w.hook_timer(100, 0, 0, "typing_update_cb", "")
     w.hook_timer(1000, 0, 0, "buffer_list_update_callback", "")
     w.hook_timer(3000, 0, 0, "reconnect_callback", "EVENTROUTER")
     w.hook_timer(1000 * 60 * 5, 0, 0, "slack_never_away_cb", "")
