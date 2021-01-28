@@ -5063,6 +5063,26 @@ def command_back(data, current_buffer, args):
 
 @slack_buffer_required
 @utf8_decode
+def command_here(data, current_buffer, args):
+    """
+    /slack here
+    Sets your status as 'here' (same as 'back').
+    """
+    return command_back(data, current_buffer, args)
+
+
+@slack_buffer_required
+@utf8_decode
+def command_active(data, current_buffer, args):
+    """
+    /slack active
+    Sets your status as 'active' (same as 'back').
+    """
+    return command_back(data, current_buffer, args)
+
+
+@slack_buffer_required
+@utf8_decode
 def command_label(data, current_buffer, args):
     """
     /label [-full] <name>|-unset
