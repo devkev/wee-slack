@@ -4589,6 +4589,24 @@ def command_showmuted(data, current_buffer, args):
 
 @slack_buffer_required
 @utf8_decode
+def command_hidemuted(data, current_buffer, args):
+    """
+    /slack hidemuted
+    Hide the muted channels in the current team.
+    Works best when using the buffer_autohide.py script to automatically unhide them if you're mentioned in them.
+    """
+    team = EVENTROUTER.weechat_controller.buffers[current_buffer].team
+    muted_channels = [team.channels[key]
+            for key in team.muted_channels if key in team.channels]
+    muted_channels_with_buffers = [channel for channel in muted_channels if channel.channel_buffer]
+    team.buffer_prnt("Hiding muted channels with buffers: {}".format(', '.join([channel.name for channel in muted_channels_with_buffers])))
+    for channel in muted_channels_with_buffers:
+        w.buffer_set(channel.channel_buffer, "hidden", "1")
+    return w.WEECHAT_RC_OK_EAT
+
+
+@slack_buffer_required
+@utf8_decode
 def command_thread(data, current_buffer, args):
     """
     /thread [count/message_id]
