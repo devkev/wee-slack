@@ -1881,6 +1881,8 @@ class SlackChannel(SlackChannelCommon):
 
         if style == "sidebar":
             name = self.label_short or name
+            if self.muted and config.color_buflist_muted_channels == "":
+                name = "(" + name + ")"
             if self.label_short_drop_prefix:
                 if show_typing:
                     name = prepend + name[1:]
@@ -5339,7 +5341,7 @@ class PluginConfig(object):
             ' typing in it. Note that this will (temporarily) affect the sort'
             ' order if you sort buffers by name rather than by number.'),
         'color_buflist_muted_channels': Setting(
-            default='darkgray',
+            default='',
             desc='Color to use for muted channels in the buflist'),
         'color_deleted': Setting(
             default='red',
