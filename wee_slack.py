@@ -2235,7 +2235,7 @@ class SlackChannel(SlackChannelCommon):
         if isinstance(message, SlackThreadMessage):
             thread_hash = self.hashed_messages[message.thread_ts]
             hash_str = colorize_string(
-                    get_thread_color(str(thread_hash)), '[{}]'.format(thread_hash))
+                    get_thread_color(str(thread_hash)), '[{}]{}'.format(thread_hash, "+" if message.subtype == "thread_broadcast" else ""))
             return '{} {}'.format(hash_str, text)
 
         return text
