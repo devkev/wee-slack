@@ -2044,7 +2044,7 @@ class SlackChannel(SlackChannelCommon):
             tags = tag(ts, tagset, user=tag_nick, self_msg=self_msg, backlog=backlog, no_log=no_log, extra_tags=extra_tags)
 
             if (config.unhide_buffers_with_activity
-                    and not self.is_visible() and not self.muted):
+                    and not self.is_visible() and not self.muted and not no_log):
                 w.buffer_set(self.channel_buffer, "hidden", "0")
 
             if no_log:
